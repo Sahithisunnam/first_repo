@@ -1,4 +1,39 @@
-hello this is git
-nice to meet sahithi.
-Needi neeke nice to meet you ha.
-edit option thona
+package org.example;
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+
+public class test1 {
+
+    WebDriver driver;
+    @BeforeClass
+    public void launch(){
+
+        System.setProperty("webdriver.edge.driver","C:\\Users\\MLRIT\\Downloads\\edgedriver_win64\\msedgedriver.exe");
+        driver =new EdgeDriver();
+        driver.get("https://mlrit.ac.in");
+        driver.manage().window().maximize();
+        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+    }
+    @Test
+    public  void test() throws InterruptedException
+    {
+        driver.getTitle();
+        driver.findElement(By.xpath("//li[@id='menu-item-3536']/a")).click();
+        Thread.sleep(10000);
+        String abc=driver.getTitle();
+        Assert.assertTrue(abc.contains("Campus Life"), "is not loaded successfully");
+    }
+    @AfterClass
+    public  void close()
+    {
+        driver.quit();
+    }
+}
